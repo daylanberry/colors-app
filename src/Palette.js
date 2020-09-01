@@ -32,6 +32,7 @@ class Palette extends Component {
   }
 
   render() {
+    console.log('prop', this.props)
     const { colors, paletteName, emoji } = this.props.palette;
     const { level, format, open } = this.state;
 
