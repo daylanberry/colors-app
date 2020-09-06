@@ -8,7 +8,7 @@ const styles = {
     backgroundColor: 'blue',
     height: '100vh',
     display: 'flex',
-    alignItems: 'flex-center',
+    alignItems: 'center',
     justifyContent: 'center'
   },
   container: {
