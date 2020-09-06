@@ -10,7 +10,6 @@ class App extends Component {
 
   findPalette = (id, array) => {
     let colorPalette = array.find(palette => palette.id === id)
-    console.log(id, colorPalette)
     return colorPalette
   }
 
@@ -22,6 +21,7 @@ class App extends Component {
           exact path='/palette/:paletteId/:colorId'
           render={(routeProps) => (
             <SingleColorPalette
+              colorId={routeProps.match.params.colorId}
               palette={generatePalette(
                 this.findPalette(routeProps.match.params.paletteId, seedColors)
               )}
