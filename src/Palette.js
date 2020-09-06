@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
+import PaletteFooter from './PaletteFooter';
 
 
 class Palette extends Component {
@@ -51,6 +52,7 @@ class Palette extends Component {
           changeLevel={this.changeLevel}
           level={level}
           handleChange={this.handleFormatChange}
+          showingAllColors
         />
         <div className='Palette-colors'>
           {colorBoxes}
@@ -74,10 +76,7 @@ class Palette extends Component {
             </IconButton>
           ]}
         />
-        <footer className='Palette-footer'>
-          {paletteName}
-          <span className='emoji'>{emoji}</span>
-        </footer>
+        <PaletteFooter paletteName={paletteName} emoji={emoji} />
       </div>
     )
   }
