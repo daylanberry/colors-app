@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import ColorBox from './ColorBox';
-import './Palette.css';
 import Navbar from './Navbar';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import PaletteFooter from './PaletteFooter';
-
+import { withStyles } from '@material-ui/core/styles';
+import styles from './styles/PaletteStyles'
 
 class Palette extends Component {
 
@@ -34,6 +34,7 @@ class Palette extends Component {
 
   render() {
     const { colors, paletteName, emoji, id } = this.props.palette;
+    const { classes } = this.props;
     const { level, format, open } = this.state;
 
     const colorBoxes = colors[level].map(color => (
@@ -41,20 +42,20 @@ class Palette extends Component {
         background={color[format]}
         name={color.name}
         key={color.id}
-        showLink={true}
+        showingFullPalette={true}
         moreUrl={`/palette/${id}/${color.id}`}
       />
 
     ))
     return (
-      <div className='Palette'>
+      <div className={classes.Palette}>
         <Navbar
           changeLevel={this.changeLevel}
           level={level}
           handleChange={this.handleFormatChange}
           showingAllColors
         />
-        <div className='Palette-colors'>
+        <div className={classes.colors}>
           {colorBoxes}
         </div>
         <Snackbar
@@ -82,4 +83,4 @@ class Palette extends Component {
   }
 }
 
-export default Palette;
+export default withStyles(styles)(Palette);
