@@ -10,19 +10,33 @@ import SingleColorPalette from './SingleColorPalette'
 class App extends Component {
   constructor(props) {
     super(props);
+    const savedPalettes = JSON.parse(window.localStorage.getItem('palettes'))
 
     this.state = {
-      palettes: seedColors
+      palettes: savedPalettes || seedColors
     }
   }
 
   findPalette = (id, array) => {
     let colorPalette = array.find(palette => palette.id === id)
     return colorPalette
-  }
+  };
+
+  deletePalette = (id) => {
+    this.setState(state => ({
+      palettes: state.palettes.filter(palette => palette.id !== id)
+    }), this.syncLocalStorage)
+
+  };
 
   savePalette = (newPalette) => {
-    this.setState({ palettes: [...this.state.palettes, newPalette]})
+    this.setState({ palettes: [...this.state.palettes, newPalette]}, () => this.syncLocalStorage())
+
+  }
+
+  syncLocalStorage = () => {
+    const { palettes } = this.state;
+    window.localStorage.setItem('palettes', JSON.stringify(palettes))
   }
 
   render() {
@@ -52,7 +66,15 @@ class App extends Component {
         />
         <Route
           exact path='/'
-          render={(props) => <PaletteList {...props} palettes={palettes}/>}
+          render={(props) => (
+            <PaletteList
+              deletePalette={this.deletePalette}
+              {...props}
+              palettes={palettes}
+
+            />
+            )
+          }
         />
         <Route
           exact path='/palette/:id'

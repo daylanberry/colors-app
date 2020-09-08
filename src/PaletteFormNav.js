@@ -2,6 +2,7 @@ import React, {useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom'
 import PaletteMetaForm from './PaletteMetaForm'
+import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -42,9 +43,11 @@ const PaletteFormNav = (props) => {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
+            className={clsx(classes.menuButton,
+              {[ classes.hide]: open
+            })}
           >
-            <MenuIcon />
+            <AddToPhotosIcon/>
           </IconButton>
           <Typography variant="h6" noWrap>
             Create a Palette

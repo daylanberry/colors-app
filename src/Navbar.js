@@ -18,10 +18,6 @@ class Navbar extends Component {
     }
   }
 
-  // handleChange = (e) => {
-  //   this.setState({ format: e.target.value },
-  //     () => this.props.handleChange(this.state.format))
-  // }
 
   render() {
     const { changeLevel, level, showingAllColors, classes } = this.props;
