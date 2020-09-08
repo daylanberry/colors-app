@@ -18,13 +18,13 @@ class Navbar extends Component {
     }
   }
 
-  handleChange = (e) => {
-    this.setState({ format: e.target.value },
-      () => this.props.handleChange(this.state.format))
-  }
+  // handleChange = (e) => {
+  //   this.setState({ format: e.target.value },
+  //     () => this.props.handleChange(this.state.format))
+  // }
 
   render() {
-    const { changeLevel, level, handleChange, showingAllColors, classes } = this.props;
+    const { changeLevel, level, showingAllColors, classes } = this.props;
     const { format } = this.state
 
     return (
