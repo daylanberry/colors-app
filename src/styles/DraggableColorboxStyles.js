@@ -1,3 +1,6 @@
+import sizes from './sizes';
+import chroma from 'chroma-js';
+
 const styles = {
   root: {
     width: "20%",
@@ -10,6 +13,18 @@ const styles = {
     '&:hover svg': {
       color: 'white',
       transform: 'scale(1.5)'
+    },
+    [sizes.down('lg')]: {
+      width: '25%',
+      height: '20%'
+    },
+    [sizes.down('md')]: {
+      width: '50%',
+      height: '10%'
+    },
+    [sizes.down('sm')]: {
+      width: '100%',
+      height: '5%'
     }
   },
   boxContent: {
@@ -23,7 +38,8 @@ const styles = {
     fontSize: "12px",
     display: 'flex',
     justifyContent: 'space-between',
-    color: 'rgba(0, 0, 0, 0.5)'
+    color: props => chroma(props.color).luminance() >= 0.5 ? 'black' : 'white',
+    fontWeight: '10'
   },
   deleteIcon: {
     transition: 'all 0.3s ease-in-out'

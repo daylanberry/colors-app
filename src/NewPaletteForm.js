@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PaletteFormNav from './PaletteFormNav';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
@@ -10,8 +9,9 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
 import DraggableColorList from './DraggableColorList';
 import arrayMove from 'array-move';
-import ColorPickerForm from './ColorPickerForm'
-import useStyles from './styles/NewPaletteFormStyles'
+import ColorPickerForm from './ColorPickerForm';
+import useStyles from './styles/NewPaletteFormStyles';
+import seedColors from './seedColors'
 
 
 const NewPaletteForm = (props) => {
@@ -19,7 +19,7 @@ const NewPaletteForm = (props) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
-  const [colors, setColors] = useState(props.palettes[0].colors);
+  const [colors, setColors] = useState(seedColors[0].colors || []);
 
   const paletteIsFull = colors.length >= 20
 
@@ -63,8 +63,16 @@ const NewPaletteForm = (props) => {
 
     const allColors = props.palettes.map(p =>p.colors).flat()
 
-    var rand = Math.floor(Math.random() * allColors.length)
-    const randomColor = allColors[rand]
+    var rand = Math.floor(Math.random() * allColors.length);
+    let randomColor = allColors[rand]
+    let isDuplicateColor = true;
+
+    while (isDuplicateColor) {
+      rand = Math.floor(Math.random() * allColors.length);
+      randomColor = allColors[rand];
+      isDuplicateColor = colors.some(color => color.name === randomColor.name)
+    }
+
 
     setColors([...colors, randomColor])
   }
@@ -133,6 +141,7 @@ const NewPaletteForm = (props) => {
           removeColor={removeColor}
           axis='xy'
           onSortEnd={onSortEnd}
+          distance={20}
         />
       </main>
     </div>

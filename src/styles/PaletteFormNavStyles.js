@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { DRAWER_WIDTH as drawerWidth } from '../constants';
+import sizes from './sizes';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,11 +34,18 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '1rem',
     '& a': {
       textDecoration: 'none'
+    },
+    [sizes.down('xs')]: {
+      marginRight: '0.5rem'
     }
   },
   button: {
     margin: '0 0.5rem',
     fontWeight: 'bold',
+    [sizes.down('xs')]: {
+      margin: '0 0.2',
+      padding: '0.3rem'
+    }
   }
 }));
 
