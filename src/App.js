@@ -17,8 +17,7 @@ class App extends Component {
     const savedPalettes = JSON.parse(window.localStorage.getItem('palettes'))
 
     this.state = {
-      palettes: savedPalettes || seedColors,
-      hi: 'hi'
+      palettes: savedPalettes || seedColors
     }
   }
 
@@ -47,8 +46,6 @@ class App extends Component {
   render() {
     const { palettes } = this.state;
     return (
-      <>
-      Test
       <Route
         render={({location}) => (
           <TransitionGroup>
@@ -125,7 +122,6 @@ class App extends Component {
           </TransitionGroup>
         )}
       />
-      </>
     );
   }
 
